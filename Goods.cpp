@@ -7,7 +7,6 @@
 using namespace std;
 
 int Goods::count = 0;
-double Goods::count1 = 0;
 
 void Goods::SetPrice(double valPrice)
 {
@@ -31,6 +30,7 @@ Goods::Goods(const char* valName, const char* valDate, double valPrice, int valN
 	date	= valDate;
 	price	= valPrice;
 	number	= valNumber;
+	count++;
 }
 
 Goods::Goods()
@@ -39,6 +39,7 @@ Goods::Goods()
 	date	= "21.11";
 	price	= 255;
 	number	= 11;
+	count++;
 }
 
 Goods::Goods(const Goods &value)
@@ -47,12 +48,14 @@ Goods::Goods(const Goods &value)
 	this->date = value.date;
 	this->price = value.price;
 	this->number = value.number;
+	count++;
 }
 
 Goods::~Goods()
 {
-	delete[] name;
-	delete[] date;
+	//delete[] name;
+	//delete[] date;
+	count--;
 }
 
 void Goods::ExtraCharge()
