@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
+#include <cassert>
 
 using namespace std;
 
@@ -13,12 +14,12 @@ void Goods::SetPrice(double valPrice)
 	if (valPrice < 0)
 	{
 		cout << "Error:the price cannot be negative" << endl;
-		ConvertingToString();
+		ToString();
 	}
 	else
 	{
 		price = valPrice;
-		ConvertingToString();
+		ToString();
 	}
 	
 }
@@ -29,12 +30,12 @@ void Goods::SetNumber(int valNumber)
 	if (valNumber < 0)
 	{
 		cout << "Error:the number cannot be negative" << endl;
-		ConvertingToString();
+		ToString();
 	}
 	else
 	{
 		number = valNumber;
-		ConvertingToString();
+		ToString();
 	}
 }
 
@@ -44,7 +45,7 @@ Goods::Goods(const char* valName, const char* valDate, double valPrice, int valN
 	date	= valDate;
 	price	= valPrice;
 	number	= valNumber;
-	ConvertingToString();
+	ToString();
 }
 
 Goods::Goods()
@@ -53,7 +54,7 @@ Goods::Goods()
 	date	= "21.11";
 	price	= 255;
 	number	= 11;
-	ConvertingToString();
+	ToString();
 }
 
 Goods::Goods(const Goods &value)
@@ -62,12 +63,13 @@ Goods::Goods(const Goods &value)
 	this->date = value.date;
 	this->price = value.price;
 	this->number = value.number;
-	ConvertingToString();
+	ToString();
 }
 
 Goods::~Goods()
 {
-
+	delete[] name;
+	delete[] date;
 }
 
 void Goods::ExtraCharge()
@@ -76,7 +78,7 @@ void Goods::ExtraCharge()
 	cout << "Starting price: " <<z<< endl;
 	price = price + ((z / 100) * 10);
 	cout << "Total price: " << price<<"\nResult:" << endl;
-	ConvertingToString();
+	ToString();
 }
 
 void Goods::Markdown()
@@ -87,69 +89,15 @@ void Goods::Markdown()
 	else
 	{
 		number--;
-		ConvertingToString();
+		ToString();
 	}
 }
 
-void Goods::ConvertingToString() {
-	 int x, k, i,l,z;
-	 l = 7;
-	 char* st = (char*)malloc(sizeof(int) * l);
-	 st[0] = 'N';
-	 st[1] = 'a';
-	 st[2] = 'm';
-	 st[3] = 'e';
-	 st[4] = ':';
-	 st[5] = ' ';
-	 st[6] = '\0';
-	 z = 6;
+void Goods::ToString() {
+	 int x, k, i,l;
 
-	 k = strlen(name);
-	 l=l+k;
-	 st = (char*)realloc(st, l);
-	 k++;
-	 for (i = 0; i < k; i++)
-	 {
-		 st[z + i] = name[i];
-	 }
-	 st[l - 1] = '\0';
-	 z = l - 1;
-
-	 l = l + 7;
-	 st = (char*)realloc(st, l);
-	 st[z] = ' ';
-	 st[z+1] = 'D';
-	 st[z+2] = 'a';
-	 st[z+3] = 't';
-	 st[z+4] = 'e';
-	 st[z+5] = ':';
-	 st[z+6] = ' ';
-	 st[l - 1] = '\0';
-	 z = l - 1;
-
-	 k = strlen(date);
-	 l = l + k;
-	 st = (char*)realloc(st, l);
-	 k++;
-	 for (i = 0; i < k; i++)
-	 {
-		 st[z + i] = date[i];
-	 }
-	 st[l - 1] = '\0';
-	 z = l - 1;
-
-	 l = l + 8;
-	 st = (char*)realloc(st, l);
-	 st[z] = ' ';
-	 st[z + 1] = 'P';
-	 st[z + 2] = 'r';
-	 st[z + 3] = 'i';
-	 st[z + 4] = 'c';
-	 st[z + 5] = 'e';
-	 st[z + 6] = ':';
-	 st[z + 7] = ' '; 
-	 st[l - 1] = '\0';
-	 z = l - 1;
+	const char* to_string(name);
+	const char* to_string1(date);
 
 	 x = price;
 	 k = 0;
@@ -158,37 +106,22 @@ void Goods::ConvertingToString() {
 		 x = x / 10;
 		 k++;
 	 }
-	 l = l + k;
-	 st = (char*)realloc(st, l);
+	 l = k + 3;
+	 char* strPrice = (char*)malloc(sizeof(int) * l);
 	 i = 0;
-	 l++; l++; x = price;
+	 x = price;
 	 while (i != k)
 	 {
-		 st[z+k-i-1] = (x % 10) + '0';
+		 strPrice[k-1-i] = (x % 10) + '0';
 		 i++;
 		 x = x / 10;
 	 }
-	 st = (char*)realloc(st, l);
-	 st[l - 3] = '.';
-	 x = price*10;
-	 st[l - 2] = (x % 10) + '0';
-	 st[l - 1] = '\0';
-	 z = l - 1; 
-	 
-	 l = l + 9;
-	 st = (char*)realloc(st, l);
-	 st[z] = ' ';
-	 st[z + 1] = 'N';
-	 st[z + 2] = 'u';
-	 st[z + 3] = 'm';
-	 st[z + 4] = 'b';
-	 st[z + 5] = 'e';
-	 st[z + 6] = 'r';
-	 st[z + 7] = ':';
-	 st[z + 8] = ' ';
-	 st[l - 1] = '\0';
-	 z = l - 1;
-	 
+	 strPrice[l - 3] = '.';
+	 x = price * 10;
+	 strPrice[l - 2] = (x % 10) + '0';
+	 strPrice[l - 1] = '\0';
+	 const char* to_string2(strPrice);
+
 	 x = number;
 	 k = 0;
 	 while (x > 0)
@@ -196,17 +129,18 @@ void Goods::ConvertingToString() {
 		 x = x / 10;
 		 k++;
 	 }
-	 l = l + k;
-	 st = (char*)realloc(st, l);
+	 l = k + 1;
+	 char* strNumber = (char*)malloc(sizeof(int) * l);
 	 i = 0;
 	 x = number;
 	 while (i != k)
 	 {
-		 st[z + k - i - 1] = (x % 10) + '0';
+		 strNumber[k - 1 - i] = (x % 10) + '0';
 		 i++;
 		 x = x / 10;
 	 }
-	 st[l - 1] = '\0';
-	 
-	 puts(st);
+	 strNumber[l-1] = '\0';
+	 const char* to_string3(strNumber);
+
+	 cout << "Name: " << to_string << "\tDate: " << to_string1 << "\tPrice: " << to_string2 << "\tNumber: " << to_string3 << endl;
 }
