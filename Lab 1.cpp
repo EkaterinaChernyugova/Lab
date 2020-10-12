@@ -8,42 +8,68 @@
 using namespace std;
 
 //тест для проверки функции изменения цены товара
-void Test1(Goods *x)
+bool Test1(Goods *x,int z)
 {
     cout << "\nTEST 1: Price Change\n" << "--------------------" << endl;
-    x->SetPrice(-57);
-    cout << x->ToString() << endl;
-    x->SetPrice(57);
-    cout << x->ToString() << endl;
+    x->count1 = x->getPrice();
+    x->SetPrice(z);
+    if (x->count1 != x->getPrice())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //тест для проверки функции изменения количества товара
-void Test2(Goods* x)
+bool Test2(Goods* x,int z)
 {
     cout << "\nTEST 2: Number Change\n" << "---------------------" << endl;
-    x->SetNumber(-19);
-    cout << x->ToString() << endl;
-    x->SetNumber(19);
-    cout << x->ToString() << endl;
+    x->count = x->getNumber();
+    x->SetNumber(z);
+    if(x->count!=x->getNumber())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //тест для проверки функции наценки товара на 10%
-void Test3(Goods* x)
+bool Test3(Goods* x)
 {
     cout << "\nTEST 3: Product markup by 10%\n" << "-----------------------------" << endl;
+    x->count1 = x->getPrice();
     x->ExtraCharge();
-    cout << x->ToString() << endl;
+    if (x->count1 != x->getPrice())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //тест для проверки функции уценки товара
-void Test4(Goods* x)
+bool Test4(Goods* x)
 {
     cout << "\nTEST 4: Markdown of goods\n" << "--------------------------" << endl;
+
+    x->count = x->getNumber();
     x->Markdown();
-    cout << x->ToString() << endl;
-    cout << "Number of goods - 0" << endl;
-    x->SetNumber(0);
-    x->Markdown();
+    if (x->count != x->getNumber())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 int main()
@@ -62,9 +88,10 @@ int main()
     cout << d.ToString() << endl;
     cout << e.ToString() << endl;
 
-    Test1(&a);
-    Test2(&b);
-    Test3(&c);
-    Test4(&d); 
-    
+    cout << Test1(&a, -57) << endl;
+    cout << Test1(&a, 57) << endl;
+    cout << Test2(&b,-19) << endl;
+    cout << Test2(&b, 19) << endl;
+    cout << Test3(&c) << endl;
+    cout << Test4(&d) << endl;
 }

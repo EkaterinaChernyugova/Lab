@@ -7,29 +7,19 @@
 using namespace std;
 
 int Goods::count = 0;
+double Goods::count1 = 0;
 
 void Goods::SetPrice(double valPrice)
 {
-	cout << "Entered the number " << valPrice << "\nResult: "<<endl;
-	if (valPrice < 0)
-	{
-		cout << "Error:the price cannot be negative" << endl;
-	}
-	else
+	if (valPrice > 0)
 	{
 		price = valPrice;
 	}
-
 }
 
 void Goods::SetNumber(int valNumber)
 {
-	cout << "Entered the number " << valNumber << "\nResult: " << endl;
-	if (valNumber < 0)
-	{
-		cout << "Error:the number cannot be negative" << endl;
-	}
-	else
+	if (valNumber > 0)
 	{
 		number = valNumber;
 	}
@@ -68,20 +58,15 @@ Goods::~Goods()
 void Goods::ExtraCharge()
 {
 	double z = price;
-	cout << "Starting price: " <<z<< endl;
 	price = price + ((z / 100) * 10);
-	cout << "Total price: " << price<<"\nResult:" << endl;
 }
 
 void Goods::Markdown()
 {
-	cout << "Starting number of goods:" << number<< "\nResult:"<< endl;
-	if (number == 0)
-		cout << "Eror: No goods" << endl;
-	else
+	if (number != 0) 
 	{
 		number--;
-	}
+	}	
 }
 
 const char* Goods::getName()

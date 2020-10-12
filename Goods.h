@@ -17,6 +17,7 @@ public:
 	char*		ToStringPrice();													//строковое преобразование цены товара
 	char*		ToStringNumber();													//строковое преобразование количества товара
 	static int count;
+	static double count1;
 	const char* getName();
 	const char* getDate();
 	double		getPrice();
