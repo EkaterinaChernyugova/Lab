@@ -177,7 +177,7 @@ char* Goods::ToString()
 	strcat_s(STR, " Number ");
 	strcat_s(STR, strNumber);
 	l = strlen(STR);
-	char* ST = (char*)malloc(sizeof(int) * l);
+	char* ST = new char[l];
 	for (i = 0; i < l; i++)
 	{
 		ST[i] = STR[i];
