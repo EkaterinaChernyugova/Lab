@@ -13,12 +13,13 @@ public:
 	void		SetNumber(int valNumber);											//изменение количества товара
 	void		ExtraCharge();														//наценка товара
 	void		Markdown();															//уценка товара 
-	void		ToString();															//строковое преобразование
+	char*		ToStringP();														//строковое преобразование цены товара
+	char*		ToStringN();														//строковое преобразование количества товара
 	static int count;
-	const char* getName() { return name; };
-	const char* getDate() { return date; };
-	double		getPrice() { return price; };
-	int			getNumber() { return number; };
+	const char* getName();
+	const char* getDate();
+	double		getPrice();
+	int			getNumber();
 
 private:
 	const char* name;					//наименование товара
