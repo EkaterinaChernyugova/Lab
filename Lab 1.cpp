@@ -12,7 +12,9 @@ void Test1(Goods *x)
 {
     cout << "\nTEST 1: Price Change\n" << "--------------------" << endl;
     x->SetPrice(-57);
+    cout << x->ToString() << endl;
     x->SetPrice(57);
+    cout << x->ToString() << endl;
 }
 
 //тест для проверки функции изменения количества товара
@@ -20,7 +22,9 @@ void Test2(Goods* x)
 {
     cout << "\nTEST 2: Number Change\n" << "---------------------" << endl;
     x->SetNumber(-19);
+    cout << x->ToString() << endl;
     x->SetNumber(19);
+    cout << x->ToString() << endl;
 }
 
 //тест для проверки функции наценки товара на 10%
@@ -28,6 +32,7 @@ void Test3(Goods* x)
 {
     cout << "\nTEST 3: Product markup by 10%\n" << "-----------------------------" << endl;
     x->ExtraCharge();
+    cout << x->ToString() << endl;
 }
 
 //тест для проверки функции уценки товара
@@ -35,6 +40,7 @@ void Test4(Goods* x)
 {
     cout << "\nTEST 4: Markdown of goods\n" << "--------------------------" << endl;
     x->Markdown();
+    cout << x->ToString() << endl;
     cout << "Number of goods - 0" << endl;
     x->SetNumber(0);
     x->Markdown();
@@ -50,9 +56,15 @@ int main()
     Goods d("Socks", "07.05", 134.0, 22);
     Goods e("Chocolate", "15.07", 61.0, 37);
     
+    cout << a.ToString() << endl;
+    cout << b.ToString() << endl;
+    cout << c.ToString() << endl;
+    cout << d.ToString() << endl;
+    cout << e.ToString() << endl;
+
     Test1(&a);
     Test2(&b);
     Test3(&c);
     Test4(&d); 
- 
+    
 }

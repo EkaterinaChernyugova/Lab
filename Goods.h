@@ -13,8 +13,9 @@ public:
 	void		SetNumber(int valNumber);											//изменение количества товара
 	void		ExtraCharge();														//наценка товара
 	void		Markdown();															//уценка товара 
-	char*		ToStringP();														//строковое преобразование цены товара
-	char*		ToStringN();														//строковое преобразование количества товара
+	char*		ToString();															//строковое преобразование 
+	char*		ToStringPrice();													//строковое преобразование цены товара
+	char*		ToStringNumber();													//строковое преобразование количества товара
 	static int count;
 	const char* getName();
 	const char* getDate();
