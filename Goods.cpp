@@ -53,8 +53,8 @@ Goods::Goods(const Goods &value)
 
 Goods::~Goods()
 {
-	//delete[] name;
-	//delete[] date;
+	delete[] name;
+	delete[] date;
 	count--;
 }
 
