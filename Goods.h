@@ -11,11 +11,19 @@ public:
 	~Goods();																		//деструктор 
 	void		SetPrice(double valPrice);											//изменение цены товара
 	void		SetNumber(int valNumber);											//изменение количества товара
+	void		SetName(const char* valName);										//изменение названия товара
+	void		SetDate(const char* valDate);										//изменение даты получения товара
 	void		ExtraCharge();														//наценка товара
 	void		Markdown();															//уценка товара 
 	char*		ToString();															//строковое преобразование 
 	char*		ToStringPrice();													//строковое преобразование цены товара
 	char*		ToStringNumber();													//строковое преобразование количества товара
+	Goods &operator = (const Goods* value);											//перегрузка оперетора присваивания
+	Goods &operator + (const Goods& value);											//перегрузка оперетора сложения
+	Goods &operator - (const Goods& value);											//перегрузка оперетора вычитания
+	Goods &operator ++ ();															//перегрузка оперетора инкремента
+	Goods &operator -- ();															//перегрузка оперетора декремента
+	operator int();																	//перегрузка операции приведения к типу int
 	static int count;
 	const char* getName();
 	const char* getDate();

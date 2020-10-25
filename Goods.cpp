@@ -8,6 +8,18 @@ using namespace std;
 
 int Goods::count = 0;
 
+void Goods::SetName(const char* valName)
+{
+	name = new const char[strlen(valName)];
+	name = valName;
+}
+
+void Goods::SetDate(const char* valDate)
+{
+	date = new const char[strlen(valDate)];
+	date = valDate;
+}
+
 void Goods::SetPrice(double valPrice)
 {
 	if (valPrice > 0)
@@ -26,6 +38,8 @@ void Goods::SetNumber(int valNumber)
 
 Goods::Goods(const char* valName, const char* valDate, double valPrice, int valNumber)
 {
+	name = new const char;
+	date = new const char;
 	name	= valName;
 	date	= valDate;
 	price	= valPrice;
@@ -35,6 +49,8 @@ Goods::Goods(const char* valName, const char* valDate, double valPrice, int valN
 
 Goods::Goods()
 {
+	name = new const char;
+	date = new const char;
 	name	= "Book";
 	date	= "21.11";
 	price	= 255;
@@ -49,6 +65,67 @@ Goods::Goods(const Goods &value)
 	this->price = value.price;
 	this->number = value.number;
 	count++;
+}
+
+Goods& Goods::operator = (const Goods* value)
+{
+	SetName(value->name);
+	SetDate(value->date);
+	this->price = value->price;
+	this->number = value->number;
+	return *this;
+}
+
+Goods& Goods::operator + (const Goods& value)
+{
+	Goods temp;
+	temp.number = this->number + value.number;
+	return temp;
+}
+
+Goods& Goods::operator - (const Goods& value)
+{
+	Goods temp;
+	temp.number = this->number - value.number;
+	return temp;
+}
+
+Goods& Goods::operator ++()
+{
+	char* str = (char*)malloc(sizeof(int) * 6);
+	str[0] = this->date[0];
+	str[1] = this->date[1];
+	str[2] = this->date[2];
+	str[3] = this->date[3];
+	str[4] = this->date[4];
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value++;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return *this;
+}
+
+Goods& Goods::operator --()
+{
+	char* str = (char*)malloc(sizeof(int) * 6);
+	str[0] = this->date[0];
+	str[1] = this->date[1];
+	str[2] = this->date[2];
+	str[3] = this->date[3];
+	str[4] = this->date[4];
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value--;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return *this;
+}
+
+Goods::operator int()
+{
+	int n = this->price+((this->price/100)*10);
+	return n;
 }
 
 Goods::~Goods()
@@ -170,7 +247,7 @@ char* Goods::ToString()
 	{
 		ST[i] = STR[i];
 	}
-	ST[l - 1] = '\0';
+	ST[l] = '\0';
 	return ST;
 }
 

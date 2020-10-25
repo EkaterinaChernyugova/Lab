@@ -4,7 +4,6 @@
 #include <string.h>
 #include <stdlib.h> 
 
-
 using namespace std;
 
 //тест для проверки функции изменения цены товара
@@ -71,6 +70,103 @@ bool Test4(Goods* x)
     }
 }
 
+// тест для проверки перегрузки оперетора присваивания
+bool Test5(Goods x, Goods y)
+{
+    cout << "\nTEST 5: Assignment operator\n" << "--------------------------" << endl;
+    x = y;
+    if ((x.getName()==y.getName())&& (x.getDate() == y.getDate())&& (x.getPrice() == y.getPrice())&& (x.getNumber() == y.getNumber())&&(&x!=&y))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// тест для проверки перегрузки оперетора сложения
+bool Test6(Goods x,Goods y)
+{
+    cout << "\nTEST 6: Addition\n" << "--------------------------" << endl;
+    Goods* w = new Goods();
+    int n = w->getNumber();
+    *w = x + y;
+    if (w->getNumber() != n)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    } 
+}
+
+// тест для проверки перегрузки оперетора вычитания
+bool Test7(Goods x, Goods y)
+{
+    cout << "\nTEST 7: Subtraction\n" << "--------------------------" << endl;
+    Goods* w = new Goods();
+    int n = w->getNumber();
+    *w = x - y;
+    if (w->getNumber() != n)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// тест для проверки перегрузки оперетора инкремента
+bool Test8(Goods x)
+{
+    cout << "\nTEST 8: Increment\n" << "--------------------------" << endl;
+    const char* s = x.getDate();
+    ++x;
+    if (strncmp(s, x.getDate(), 2) != 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// тест для проверки перегрузки оперетора декремента
+bool Test9(Goods x)
+{
+    cout << "\nTEST 9: Decrement\n" << "--------------------------" << endl;
+    const char* s = x.getDate();
+    --x;
+    if (strncmp(s, x.getDate(), 2) != 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// тест для проверки перегрузки операции приведения к типу int
+bool Test10(Goods x)
+{
+    cout << "\nTEST 10: Cast to type int\n" << "--------------------------" << endl;
+    int n = (int)x;
+    x.ExtraCharge();
+    if(n!=x.getPrice())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 int main()
 {
     cout << "List of Goods:\n"<<"---------------" << endl;
@@ -97,11 +193,18 @@ int main()
     cout << Test2(&b, 19) << endl;
     cout << Test3(&c) << endl;
     cout << Test4(&d) << endl;
-    
+    cout << Test5(a, b) << endl;
+    cout << Test6(a, b) << endl;
+    cout << Test7(a, b) << endl;
+    cout << Test8(c) << endl;
+    cout << Test9(c) << endl;
+    cout << Test10(d) << endl;
+
     Goods* f = new Goods();
     cout << "Number of objects = " << Goods::count << endl;
     delete f;
     cout << "Number of objects = " << Goods::count << endl;
+  
 }
 
 
