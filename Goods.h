@@ -24,6 +24,8 @@ public:
 	Goods &operator ++ ();															//перегрузка оперетора инкремента
 	Goods &operator -- ();															//перегрузка оперетора декремента
 	operator int();																	//перегрузка операции приведения к типу int
+	friend Goods operator +(Goods& a,Goods& b);										//дружественный оператор сложения
+	friend Goods operator -(Goods& a, Goods& b);									//дружественный оператор вычитания
 	static int count;
 	const char* getName();
 	const char* getDate();

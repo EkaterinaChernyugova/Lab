@@ -92,12 +92,8 @@ Goods& Goods::operator - (const Goods& value)
 
 Goods& Goods::operator ++()
 {
-	char* str = (char*)malloc(sizeof(int) * 6);
-	str[0] = this->date[0];
-	str[1] = this->date[1];
-	str[2] = this->date[2];
-	str[3] = this->date[3];
-	str[4] = this->date[4];
+	char str[6];
+	strcpy_s(str, this->date);
 	str[5] = '\0';
 	int value = atoi(&str[1]);
 	value++;
@@ -108,12 +104,8 @@ Goods& Goods::operator ++()
 
 Goods& Goods::operator --()
 {
-	char* str = (char*)malloc(sizeof(int) * 6);
-	str[0] = this->date[0];
-	str[1] = this->date[1];
-	str[2] = this->date[2];
-	str[3] = this->date[3];
-	str[4] = this->date[4];
+	char str[6];
+	strcpy_s(str, this->date);
 	str[5] = '\0';
 	int value = atoi(&str[1]);
 	value--;
@@ -124,8 +116,19 @@ Goods& Goods::operator --()
 
 Goods::operator int()
 {
-	int n = this->price+((this->price/100)*10);
-	return n;
+	return this->price + ((this->price / 100) * 10);
+}
+
+Goods operator +(Goods& a, Goods& b)
+{
+	a.number = a.number + b.number;
+	return a;
+}
+
+Goods operator -(Goods& a, Goods& b)
+{
+	a.number = a.number - b.number;
+	return a;
 }
 
 Goods::~Goods()

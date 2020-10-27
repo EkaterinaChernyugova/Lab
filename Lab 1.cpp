@@ -167,6 +167,38 @@ bool Test10(Goods x)
     }
 }
 
+// тест для проверки дружественного оперетора сложения
+bool Test11(Goods x, Goods y)
+{
+    cout << "\nTEST 11: Friendly addition operator\n" << "--------------------------" << endl;
+    int temp = x.getNumber();
+    x + y;
+    if(x.getNumber()!=temp)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// тест для проверки дружественного оперетора вычитания
+bool Test12(Goods x, Goods y)
+{
+    cout << "\nTEST 12: Friendly subtraction operator\n" << "--------------------------" << endl;
+    int temp = x.getNumber();
+    x - y;
+    if (x.getNumber() != temp)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 int main()
 {
     cout << "List of Goods:\n"<<"---------------" << endl;
@@ -199,6 +231,8 @@ int main()
     cout << Test8(c) << endl;
     cout << Test9(c) << endl;
     cout << Test10(d) << endl;
+    cout << Test11(a,b) << endl;
+    cout << Test12(d,e) << endl;
 
     Goods* f = new Goods();
     cout << "Number of objects = " << Goods::count << endl;
