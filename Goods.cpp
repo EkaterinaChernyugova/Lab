@@ -76,10 +76,10 @@ Goods& Goods::operator = (const Goods* value)
 	return *this;
 }
 
-Goods& Goods::operator + (const Goods& value)
+Goods operator + (Goods& value1,Goods& value2)
 {
 	Goods temp;
-	temp.number = this->number + value.number;
+	temp.number = value1.number + value2.number;
 	return temp;
 }
 
@@ -114,21 +114,37 @@ Goods& Goods::operator --()
 	return *this;
 }
 
-Goods::operator int()
+Goods& Goods::operator ++(const int)
 {
-	return this->price + ((this->price / 100) * 10);
+	Goods temp(*this);
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value++;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return temp;
 }
 
-Goods operator +(Goods& a, Goods& b)
+Goods& Goods::operator --(const int)
 {
-	a.number = a.number + b.number;
-	return a;
+	Goods temp(*this);
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value--;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return temp;
 }
 
-Goods operator -(Goods& a, Goods& b)
+Goods::operator double()
 {
-	a.number = a.number - b.number;
-	return a;
+	Goods object;
+	double res = (double)object.price;
+	return res;
 }
 
 Goods::~Goods()

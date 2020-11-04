@@ -85,7 +85,7 @@ bool Test5(Goods x, Goods y)
     }
 }
 
-// тест для проверки перегрузки оперетора сложения
+// тест для проверки перегрузки дружественного оперетора сложения
 bool Test6(Goods x,Goods y)
 {
     cout << "\nTEST 6: Addition\n" << "--------------------------" << endl;
@@ -119,10 +119,10 @@ bool Test7(Goods x, Goods y)
     }
 }
 
-// тест для проверки перегрузки оперетора инкремента
+// тест для проверки перегрузки префиксного оперетора инкремента
 bool Test8(Goods x)
 {
-    cout << "\nTEST 8: Increment\n" << "--------------------------" << endl;
+    cout << "\nTEST 8: Prefix increment\n" << "--------------------------" << endl;
     const char* s = x.getDate();
     ++x;
     if (strncmp(s, x.getDate(), 2) != 0)
@@ -135,10 +135,10 @@ bool Test8(Goods x)
     }
 }
 
-// тест для проверки перегрузки оперетора декремента
+// тест для проверки перегрузки префиксного оперетора декремента
 bool Test9(Goods x)
 {
-    cout << "\nTEST 9: Decrement\n" << "--------------------------" << endl;
+    cout << "\nTEST 9: Prefix decrement\n" << "--------------------------" << endl;
     const char* s = x.getDate();
     --x;
     if (strncmp(s, x.getDate(), 2) != 0)
@@ -151,13 +151,13 @@ bool Test9(Goods x)
     }
 }
 
-// тест для проверки перегрузки операции приведения к типу int
+// тест для проверки перегрузки постфиксного оперетора инкремента
 bool Test10(Goods x)
 {
-    cout << "\nTEST 10: Cast to type int\n" << "--------------------------" << endl;
-    int n = (int)x;
-    x.ExtraCharge();
-    if(n!=x.getPrice())
+    cout << "\nTEST 10: Postfix increment\n" << "--------------------------" << endl;
+    const char* s = x.getDate();
+    x++;
+    if (strncmp(s, x.getDate(), 2) != 0)
     {
         return true;
     }
@@ -167,13 +167,13 @@ bool Test10(Goods x)
     }
 }
 
-// тест для проверки дружественного оперетора сложения
-bool Test11(Goods x, Goods y)
+// тест для проверки перегрузки постфиксного оперетора декремента
+bool Test11(Goods x)
 {
-    cout << "\nTEST 11: Friendly addition operator\n" << "--------------------------" << endl;
-    int temp = x.getNumber();
-    x + y;
-    if(x.getNumber()!=temp)
+    cout << "\nTEST 11: Postfix decrement\n" << "--------------------------" << endl;
+    const char* s = x.getDate();
+    x--;
+    if (strncmp(s, x.getDate(), 2) != 0)
     {
         return true;
     }
@@ -183,21 +183,19 @@ bool Test11(Goods x, Goods y)
     }
 }
 
-// тест для проверки дружественного оперетора вычитания
-bool Test12(Goods x, Goods y)
+// тест для проверки перегрузки операции приведения к типу double
+bool Test12(Goods x)
 {
-    cout << "\nTEST 12: Friendly subtraction operator\n" << "--------------------------" << endl;
-    int temp = x.getNumber();
-    x - y;
-    if (x.getNumber() != temp)
-    {
+    cout << "\nTEST 12: Cast to type int\n" << "--------------------------" << endl;
+   // double n = (double)x;
+    if ((double)x == (double)x.getPrice()) {
         return true;
     }
-    else
-    {
+    else {
         return false;
     }
 }
+
 
 int main()
 {
@@ -230,11 +228,12 @@ int main()
     cout << Test7(a, b) << endl;
     cout << Test8(c) << endl;
     cout << Test9(c) << endl;
-    cout << Test10(d) << endl;
-    cout << Test11(a,b) << endl;
-    cout << Test12(d,e) << endl;
+    cout << Test10(c) << endl;
+    cout << Test11(c) << endl;
 
     Goods* f = new Goods();
+    cout << Test12(*f) << endl;
+
     cout << "Number of objects = " << Goods::count << endl;
     delete f;
     cout << "Number of objects = " << Goods::count << endl;

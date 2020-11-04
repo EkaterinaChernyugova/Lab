@@ -19,13 +19,14 @@ public:
 	char*		ToStringPrice();													//строковое преобразование цены товара
 	char*		ToStringNumber();													//строковое преобразование количества товара
 	Goods &operator = (const Goods* value);											//перегрузка оперетора присваивания
-	Goods &operator + (const Goods& value);											//перегрузка оперетора сложения
+	friend Goods operator + (Goods& value1,Goods& value2);							//перегрузка дружественного оперетора сложения
 	Goods &operator - (const Goods& value);											//перегрузка оперетора вычитания
-	Goods &operator ++ ();															//перегрузка оперетора инкремента
-	Goods &operator -- ();															//перегрузка оперетора декремента
-	operator int();																	//перегрузка операции приведения к типу int
-	friend Goods operator +(Goods& a,Goods& b);										//дружественный оператор сложения
-	friend Goods operator -(Goods& a, Goods& b);									//дружественный оператор вычитания
+	Goods &operator ++ ();															//перегрузка префиксного оперетора инкремента
+	Goods &operator -- ();															//перегрузка префиксного оперетора декремента
+	Goods& operator ++ (const int);													//перегрузка постфиксного оперетора инкремента
+	Goods& operator -- (const int);													//перегрузка постфиксного оперетора декремента
+	operator double();																//перегрузка операции приведения к типу double
+	
 	static int count;
 	const char* getName();
 	const char* getDate();
