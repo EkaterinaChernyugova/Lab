@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <fstream>
 #include <ostream>
@@ -18,14 +19,14 @@ public:
 	void		SetDate(const char* valDate);										//изменение даты получения товара
 	void		ExtraCharge();														//наценка товара
 	void		Markdown();															//уценка товара 
-	char* ToString();															//строковое преобразование 
-	char* ToStringPrice();													//строковое преобразование цены товара
-	char* ToStringNumber();													//строковое преобразование количества товара
-	Goods& operator = (const Goods* value);											//перегрузка оператора присваивания
-	friend Goods operator + (Goods& value1, Goods& value2);							//перегрузка дружественного оператора сложения
-	Goods& operator - (const Goods& value);											//перегрузка оператора вычитания
-	Goods& operator ++ ();															//перегрузка префиксного оператора инкремента
-	Goods& operator -- ();															//перегрузка префиксного оператора декремента
+	char*		ToString();															//строковое преобразование 
+	char*		ToStringPrice();													//строковое преобразование цены товара
+	char*		ToStringNumber();													//строковое преобразование количества товара
+	Goods &operator = (const Goods* value);											//перегрузка оператора присваивания
+	friend Goods operator + (Goods& value1,Goods& value2);							//перегрузка дружественного оператора сложения
+	Goods &operator - (const Goods& value);											//перегрузка оператора вычитания
+	Goods &operator ++ ();															//перегрузка префиксного оператора инкремента
+	Goods &operator -- ();															//перегрузка префиксного оператора декремента
 	Goods& operator ++ (const int);													//перегрузка постфиксного оператора инкремента
 	Goods& operator -- (const int);													//перегрузка постфиксного оператора декремента
 	operator double();																//перегрузка операции приведения к типу double
@@ -52,3 +53,4 @@ private:
 	double		price;					//цена товара
 	int			number;					//количество единиц
 };
+
