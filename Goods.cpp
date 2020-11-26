@@ -62,14 +62,14 @@ Goods::Goods()
 {
 	name = new const char;
 	date = new const char;
-	name	= "Book";
-	date	= "21.11";
-	price	= 255;
-	number	= 11;
+	name = "Book";
+	date = "21.11";
+	price = 255;
+	number = 11;
 	count++;
 }
 
-Goods::Goods(const Goods &value)
+Goods::Goods(const Goods& value)
 {
 	this->name = value.name;
 	this->date = value.date;
@@ -94,7 +94,7 @@ Goods& Goods::operator = (const Goods* value)
 	}
 }
 
-Goods operator + (Goods& value1,Goods& value2)
+Goods operator + (Goods& value1, Goods& value2)
 {
 	Goods temp;
 	temp.number = value1.number + value2.number;
@@ -224,15 +224,15 @@ std::ofstream& operator <<(std::ofstream& os, Goods& value)
 {
 	char* str = value.ToString();
 	int k = strlen(str);
-	int i = 0,j;
+	int i = 0, j;
 	int s;
-	
+
 	for (i = 0; i < k; i++)
 	{
 		s = (int)str[i];
 		bitset<7> temp(s);
 		os << temp << " ";
-		
+
 	}
 	os << ';';
 	return os;
@@ -257,11 +257,11 @@ std::istream& operator >>(std::istream& is, Goods& value)
 std::ifstream& operator >>(std::ifstream& ifs, Goods& value)
 {
 	int c, k, w, n;
-	char* s=new char;
+	char* s = new char;
 	char str[100];
 	s[0] = ' ';
 	n = 0;
-	while (s[0]!=';')
+	while (s[0] != ';')
 	{
 		k = 0;
 		w = 0;
@@ -286,12 +286,12 @@ std::ifstream& operator >>(std::ifstream& ifs, Goods& value)
 	w = 6;
 	while (str[w + k] != ' ')
 	{
-		s1[k] = str[w+k];
+		s1[k] = str[w + k];
 		k++;
 
 	}
 	s1[k] = '\0';
-	w = w + k+7;
+	w = w + k + 7;
 	k = 0;
 	while (str[w + k] != ' ')
 	{
@@ -349,7 +349,7 @@ void Goods::readText()
 		fs >> *this;
 	}
 	fs.close();
-	
+
 }
 
 void Goods::writeBinary()
@@ -378,8 +378,8 @@ void Goods::readBinary()
 
 Goods::~Goods()
 {
-	//delete[] name;
-	//delete[] date;
+	delete[] name;
+	delete[] date;
 	count--;
 }
 
@@ -406,7 +406,7 @@ void Goods::Markdown()
 
 const char* Goods::getName()
 {
-	return name; 
+	return name;
 }
 
 const char* Goods::getDate()
@@ -414,12 +414,12 @@ const char* Goods::getDate()
 	return date;
 }
 
-double	Goods::getPrice() 
-{ 
-	return price; 
+double	Goods::getPrice()
+{
+	return price;
 }
 
-int		Goods::	getNumber() 
+int		Goods::getNumber()
 {
 	return number;
 }
@@ -475,7 +475,7 @@ char* Goods::ToStringNumber()
 	return strNumber;
 }
 
-char* Goods::ToString() 
+char* Goods::ToString()
 {
 	int  k, l, i;
 	char* strPrice;
@@ -505,6 +505,4 @@ char* Goods::ToString()
 	ST[l] = '\0';
 	return ST;
 }
-
-
 
