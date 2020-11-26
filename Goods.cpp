@@ -42,13 +42,20 @@ void Goods::SetNumber(int valNumber)
 
 Goods::Goods(const char* valName, const char* valDate, double valPrice, int valNumber)
 {
-	name = new const char;
-	date = new const char;
-	name	= valName;
-	date	= valDate;
-	price	= valPrice;
-	number	= valNumber;
-	count++;
+	try
+	{
+		name = new const char;
+		date = new const char;
+		name = valName;
+		date = valDate;
+		price = valPrice;
+		number = valNumber;
+		count++;
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 Goods::Goods()
@@ -73,11 +80,18 @@ Goods::Goods(const Goods &value)
 
 Goods& Goods::operator = (const Goods* value)
 {
-	SetName(value->name);
-	SetDate(value->date);
-	this->price = value->price;
-	this->number = value->number;
-	return *this;
+	try
+	{
+		SetName(value->name);
+		SetDate(value->date);
+		this->price = value->price;
+		this->number = value->number;
+		return *this;
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 Goods operator + (Goods& value1,Goods& value2)
@@ -89,9 +103,16 @@ Goods operator + (Goods& value1,Goods& value2)
 
 Goods& Goods::operator - (const Goods& value)
 {
-	Goods temp;
-	temp.number = this->number - value.number;
-	return temp;
+	try
+	{
+		Goods temp;
+		temp.number = this->number - value.number;
+		return temp;
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 Goods& Goods::operator ++()
@@ -115,21 +136,28 @@ Goods& Goods::operator ++()
 
 Goods& Goods::operator --()
 {
-	char str[6];
-	strcpy_s(str, this->date);
-	str[5] = '\0';
-	int value = atoi(&str[1]);
-	value--;
-	str[1] = (value % 10) + '0';
-	char* s = new char;
-	s[0] = str[0];
-	s[1] = str[1];
-	s[2] = str[2];
-	s[3] = str[3];
-	s[4] = str[4];
-	s[5] = '\0';
-	this->SetDate(s);
-	return *this;
+	try
+	{
+		char str[6];
+		strcpy_s(str, this->date);
+		str[5] = '\0';
+		int value = atoi(&str[1]);
+		value--;
+		str[1] = (value % 10) + '0';
+		char* s = new char;
+		s[0] = str[0];
+		s[1] = str[1];
+		s[2] = str[2];
+		s[3] = str[3];
+		s[4] = str[4];
+		s[5] = '\0';
+		this->SetDate(s);
+		return *this;
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 Goods& Goods::operator ++(const int)
@@ -154,22 +182,29 @@ Goods& Goods::operator ++(const int)
 
 Goods& Goods::operator --(const int)
 {
-	Goods temp(*this);
-	char str[6];
-	strcpy_s(str, this->date);
-	str[5] = '\0';
-	int value = atoi(&str[1]);
-	value--;
-	str[1] = (value % 10) + '0';
-	char* s = new char;
-	s[0] = str[0];
-	s[1] = str[1];
-	s[2] = str[2];
-	s[3] = str[3];
-	s[4] = str[4];
-	s[5] = '\0';
-	this->SetDate(s);
-	return temp;
+	try
+	{
+		Goods temp(*this);
+		char str[6];
+		strcpy_s(str, this->date);
+		str[5] = '\0';
+		int value = atoi(&str[1]);
+		value--;
+		str[1] = (value % 10) + '0';
+		char* s = new char;
+		s[0] = str[0];
+		s[1] = str[1];
+		s[2] = str[2];
+		s[3] = str[3];
+		s[4] = str[4];
+		s[5] = '\0';
+		this->SetDate(s);
+		return temp;
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 Goods::operator double()
@@ -343,8 +378,8 @@ void Goods::readBinary()
 
 Goods::~Goods()
 {
-	delete[] name;
-	delete[] date;
+	//delete[] name;
+	//delete[] date;
 	count--;
 }
 
@@ -356,10 +391,17 @@ void Goods::ExtraCharge()
 
 void Goods::Markdown()
 {
-	if (number != 0) 
+	try
 	{
-		number--;
-	}	
+		if (number != 0)
+		{
+			number--;
+		}
+	}
+	catch (exception& ex)
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 const char* Goods::getName()

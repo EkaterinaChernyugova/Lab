@@ -21,7 +21,7 @@ int main()
     cout << b.ToString() << endl;
     cout << c.ToString() << endl;
 
-    cout << TestSet("abc", "def", 23.05, 145) << endl;
+    
     cout << TestMark(&a) << endl;
     cout << TestAss(a, b) << endl;
     cout << TestSub(a, b) << endl;
