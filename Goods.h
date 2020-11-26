@@ -1,10 +1,10 @@
 #pragma once
+
 #include <iostream>
 #include <fstream>
 #include <ostream>
 
 using namespace std;
-
 class Goods
 {
 public:
@@ -32,13 +32,9 @@ public:
 
 	friend ostream& operator << (ostream& os, Goods& value);						//перегрузка оператора вывода
 	friend istream& operator >> (istream& is, Goods& value);						//перегрузка оператора ввода
-	friend ofstream& operator << (ofstream& os, Goods& value);						//перегрузка оператора вывода
-	friend ifstream& operator >> (ifstream& is, Goods& value);						//перегрузка оператора ввода
 
-	void writeText();																//функция записи в тектовый файл 
-	void readText();																//функция загрузки объектов из текстового файла
-	void writeBinary();																//функция записи в двоичный файл
-	void readBinary();																//функция загрузки объектов из двоичного файла
+	void write(const char * file);
+	void read(const char* file);
 
 	static int count;
 	const char* getName();
@@ -52,3 +48,4 @@ private:
 	double		price;					//цена товара
 	int			number;					//количество единиц
 };
+
