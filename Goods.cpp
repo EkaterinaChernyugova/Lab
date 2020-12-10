@@ -214,39 +214,19 @@ Goods::operator double()
 	return res;
 }
 
-std::ostream& operator <<(std::ostream& os, Goods& value)
+ostream& operator << (ostream& os, Goods& value)
 {
-	os << value.ToString();
+	os << value.name << " " << value.date << " " << value.price << " " << value.number << endl;
 	return os;
 }
 
-std::ofstream& operator <<(std::ofstream& os, Goods& value)
-{
-	char* str = value.ToString();
-	int k = strlen(str);
-	int i = 0, j;
-	int s;
-
-	for (i = 0; i < k; i++)
-	{
-		s = (int)str[i];
-		bitset<7> temp(s);
-		os << temp << " ";
-
-	}
-	os << ';';
-	return os;
-}
-
-std::istream& operator >>(std::istream& is, Goods& value)
+istream& operator >> (istream& is, Goods& value)
 {
 	char* s1 = new char;
 	char* s2 = new char;
-	char* s3 = new char;
-	char* s4 = new char;
-	is >> s1 >> s1 >> s2 >> s2 >> s3 >> s3 >> s4 >> s4;
-	double pr = atoi(s3);
-	int num = atoi(s4);
+	double pr;
+	int num;
+	is >> s1 >> s2 >> pr >> num;
 	value.SetName(s1);
 	value.SetDate(s2);
 	value.SetPrice(pr);
@@ -254,126 +234,138 @@ std::istream& operator >>(std::istream& is, Goods& value)
 	return is;
 }
 
-std::ifstream& operator >>(std::ifstream& ifs, Goods& value)
+void Goods::write()
 {
-	int c, k, w, n;
-	char* s = new char;
-	char str[100];
-	s[0] = ' ';
-	n = 0;
-	while (s[0] != ';')
+	const char* file = "MyFile1.txt";
+	int i, k, s;
+	double s1;
+	fstream fs;
+	fs.open(file, fstream::in | fstream::out | fstream::app);
+	if (!fs.is_open())
 	{
-		k = 0;
-		w = 0;
-		ifs >> s;
-		if (s[0] == ';') { break; }
-		c = atoi(s);
+		cout << "File open error" << endl;
+	}
+	else
+	{
+		k = strlen(name);
+		for (i = 0; i < k; i++)
+		{
+			s = (int)name[i];
+			bitset<7> temp(s);
+			fs << temp;
+		}
+		fs << " ";
+		k = strlen(date);
+		for (i = 0; i < k; i++)
+		{
+			s = (int)date[i];
+			bitset<7> temp(s);
+			fs << temp;
+		}
+		fs << " ";
+		s1 = price;
+		bitset<7> temp(s1);
+		fs << temp;
+		fs << " ";
+		s = number;
+		bitset<7> temp1(s);
+		fs << temp1;
+		fs << " ";
+	}
+	fs << '\n';
+	fs.close();
+}
+
+void Goods::read()
+{
+	const char* file = "MyFile1.txt";
+	int i, k, s;
+	double s1;
+	fstream fs;
+	fs.open(file, fstream::in | fstream::out | fstream::app);
+	if (!fs.is_open())
+	{
+		cout << "File open error" << endl;
+	}
+	else
+	{
+		int i, k, n, w, x;
+		char* str = new char;
+		char* s = new char;
+		char* s1 = new char;
+		char* s2 = new char;
+		int c;
+		fs >> str;
+		n = strlen(str);
+		k = 0; w = 0;
+		while (k < n - 1)
+		{
+			for (i = 0; i < 7; i++)
+			{
+				s[i] = str[k + i];
+			}
+			s[7] = '\0';
+			k = k + 7;
+			c = atoi(s);
+			i = 0; x = 0;
+			while (c != 0)
+			{
+				x = x + (c % 10) * pow(2, i);
+				i++;
+				c = c / 10;
+			}
+			s1[w] = (char)x;
+			w++;
+		}
+		s1[w] = '\0';
+		this->SetName(s1);
+		fs >> str;
+		n = strlen(str);
+		k = 0; w = 0;
+		while (k < n - 1)
+		{
+			for (i = 0; i < 7; i++)
+			{
+				s[i] = str[k + i];
+			}
+			s[7] = '\0';
+			k = k + 7;
+			c = atoi(s);
+			i = 0; x = 0;
+			while (c != 0)
+			{
+				x = x + (c % 10) * pow(2, i);
+				i++;
+				c = c / 10;
+			}
+			s2[w] = (char)x;
+			w++;
+		}
+		s2[w] = '\0';
+		this->SetDate(s2);
+		fs >> str;
+		c = atoi(str);
+		i = 0; x = 0;
 		while (c != 0)
 		{
-			w = w + (c % 10) * pow(2, k);
-			k++;
+			x = x + (c % 10) * pow(2, i);
+			i++;
 			c = c / 10;
 		}
-		str[n] = (char)w;
-		n++;
-	}
-	str[n] = '\0';
-	char* s1 = new char;
-	char* s2 = new char;
-	char* s3 = new char;
-	char* s4 = new char;
-	k = 0;
-	w = 6;
-	while (str[w + k] != ' ')
-	{
-		s1[k] = str[w + k];
-		k++;
-
-	}
-	s1[k] = '\0';
-	w = w + k + 7;
-	k = 0;
-	while (str[w + k] != ' ')
-	{
-		s2[k] = str[w + k];
-		k++;
-
-	}
-	s2[k] = '\0';
-	w = w + k + 7;
-	k = 0;
-	while (str[w + k] != ' ')
-	{
-		s3[k] = str[w + k];
-		k++;
-
-	}
-	s3[k] = '\0';
-	w = w + k + 8;
-	k = 0;
-	while (str[w + k] != '\0')
-	{
-		s4[k] = str[w + k];
-		k++;
-
-	}
-	s4[k] = '\0';
-	double pr = atoi(s3);
-	int num = atoi(s4);
-	value.SetName(s1);
-	value.SetDate(s2);
-	value.SetPrice(pr);
-	value.SetNumber(num);
-	return ifs;
-}
-
-void Goods::writeText()
-{
-	string path = "myFile.txt";
-	fstream fs;
-	fs.open(path, fstream::in | fstream::out | fstream::app);
-	if (fs.is_open())
-	{
-		fs << *this << endl;
+		this->SetPrice(x);
+		char* str1 = new char;
+		fs >> str1;
+		int c1 = atoi(str1);
+		i = 0; x = 0;
+		while (c1 != 0)
+		{
+			x = x + (c1 % 10) * pow(2, i);
+			i++;
+			c1 = c1 / 10;
+		}
+		this->SetNumber(x);
 	}
 	fs.close();
-}
-
-void Goods::readText()
-{
-	string path = "myFile.txt";
-	fstream fs;
-	fs.open(path, fstream::in | fstream::out | fstream::app);
-	if (fs.is_open())
-	{
-		fs >> *this;
-	}
-	fs.close();
-
-}
-
-void Goods::writeBinary()
-{
-	string path = "myFile1.txt";
-	ofstream ofs;
-	ofs.open(path, ofstream::in | ofstream::out | ofstream::app);
-	if (ofs.is_open())
-	{
-		ofs << *this << endl;
-	}
-	ofs.close();
-}
-
-void Goods::readBinary()
-{
-	string path = "myFile1.txt";
-	ifstream ofs;
-	ofs.open(path, ifstream::in | ifstream::out | ifstream::app);
-	if (ofs.is_open())
-	{
-		ofs >> *this;
-	}
-	ofs.close();
 }
 
 Goods::~Goods()
@@ -505,4 +497,3 @@ char* Goods::ToString()
 	ST[l] = '\0';
 	return ST;
 }
-
