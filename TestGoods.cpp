@@ -28,7 +28,8 @@ bool TestText(Goods x, Goods y)
 bool TestBinary(Goods x, Goods y)
 {
     cout << "\nTEST: Operators << and >> (Binary)\n" << "--------------------------" << endl;
-    x.write("MyFile1.txt");
-    y.read("MyFile1.txt");
+    
+    x.write();
+    y.read();
     return true;
 }

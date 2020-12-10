@@ -199,8 +199,9 @@ istream& operator >> (istream& is, Goods& value)
 	return is;
 }
 
-void Goods::write(const char* file)
+void Goods::write()
 {
+	const char* file = "MyFile1.txt";
 	int i, k, s;
 	double s1;
 	fstream fs;
@@ -240,8 +241,9 @@ void Goods::write(const char* file)
 	fs.close();
 }
 
-void Goods::read(const char* file)
+void Goods::read()
 {
+	const char* file = "MyFile1.txt";
 	int i, k, s;
 	double s1;
 	fstream fs;
@@ -252,7 +254,7 @@ void Goods::read(const char* file)
 	}
 	else
 	{
-		int i, k, n, w,x;
+		int i, k, n, w, x;
 		char* str = new char;
 		char* s = new char;
 		char* s1 = new char;
@@ -453,5 +455,3 @@ char* Goods::ToString()
 	ST[l] = '\0';
 	return ST;
 }
-
-
