@@ -7,6 +7,7 @@
 #include <fstream>
 #include <ostream>
 
+
 using namespace std;
 
 int main()
@@ -22,9 +23,9 @@ int main()
     cout << c.ToString() << endl;
 
 
+
     cout << TestMark(&a) << endl;
     cout << TestAss(a, b) << endl;
     cout << TestSub(a, b) << endl;
-    cout << TestDecPr(c) << endl;
-    cout << TestDecPost(a) << endl;
+    cout << TestWR(a, b) << endl;
 }

@@ -3,16 +3,14 @@
 bool TestMark(Goods* x)
 {
     cout << "\nTEST: Markdown of goods\n" << "--------------------------" << endl;
-    x->SetNumber(1);
-    int val = x->getNumber();
-    x->Markdown();
-    x->Markdown();
-    if (val != x->getNumber())
+    try
     {
+        x->Markdown();
         return true;
     }
-    else
+    catch (exception& ex)
     {
+        cout << ex.what() << endl;
         return false;
     }
 }
@@ -20,13 +18,18 @@ bool TestMark(Goods* x)
 bool TestAss(Goods x, Goods y)
 {
     cout << "\nTEST: Assignment operator\n" << "--------------------------" << endl;
-    x = y;
-    if ((x.getName() == y.getName()) && (x.getDate() == y.getDate()) && (x.getPrice() == y.getPrice()) && (x.getNumber() == y.getNumber()) && (&x != &y))
+
+    try
     {
-        return true;
+        x = y;
+        if ((x.getName() == y.getName()) && (x.getDate() == y.getDate()) && (x.getPrice() == y.getPrice()) && (x.getNumber() == y.getNumber()) && (&x != &y))
+        {
+            return true;
+        }
     }
-    else
+    catch (exception& ex)
     {
+        cout << ex.what() << endl;
         return false;
     }
 }
@@ -34,49 +37,38 @@ bool TestAss(Goods x, Goods y)
 bool TestSub(Goods x, Goods y)
 {
     cout << "\nTEST: Subtraction\n" << "--------------------------" << endl;
-    Goods* w = new Goods();
-    int n = w->getNumber();
-    x.SetNumber(10);
-    y.SetNumber(20);
-    *w = x - y;
-    if (w->getNumber() != n)
+    try
     {
+        Goods* w = new Goods();
+        *w = x - y;
         return true;
+
     }
-    else
+    catch (exception& ex)
     {
+        cout << ex.what() << endl;
         return false;
     }
 }
 
-bool TestDecPr(Goods x)
+bool TestWR(Goods x, Goods y)
 {
-    cout << "\nTEST: Prefix decrement\n" << "--------------------------" << endl;
-    const char* s = x.getDate();
-    x.SetDate("00.00");
-    --x;
-    if (strncmp(s, x.getDate(), 2) != 0)
+    cout << "\nTEST: Write\n" << "--------------------------" << endl;
+    try
     {
-        return true;
+        x.write();
+        y.read();
+        if (strcmp(x.getName(), y.getName()) == 0 && strcmp(x.getDate(), y.getDate()) == 0 && x.getPrice() == y.getPrice() && x.getNumber() == y.getNumber())
+        {
+            return true;
+        }
+
     }
-    else
+    catch (exception& ex)
     {
+        cout << ex.what() << endl;
         return false;
     }
 }
 
-bool TestDecPost(Goods x)
-{
-    cout << "\nTEST: Postfix decrement\n" << "--------------------------" << endl;
-    const char* s = x.getDate();
-    x.SetDate("00.00");
-    x--;
-    if (strncmp(s, x.getDate(), 2) != 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
+
