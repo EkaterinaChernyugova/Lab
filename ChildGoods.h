@@ -4,9 +4,6 @@
 
 class ChildGoods : public Goods
 {
-private:
-	const char* age;
-	const char* type;
 public:
 	ChildGoods(const char* valName, const char* valDate, double valPrice, int valNumber,const char* valAge,const char* valtype);
 	~ChildGoods();
@@ -16,4 +13,7 @@ public:
 	void setType(const char* valType);
 	char* ToStringChild();
 	int CheckAge(int val);
+private:
+	const char* age;
+	const char* type;
 };

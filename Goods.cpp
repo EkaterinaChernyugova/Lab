@@ -201,136 +201,35 @@ istream& operator >> (istream& is, Goods& value)
 
 void Goods::write()
 {
-	const char* file = "MyFile1.txt";
-	int i, k, s;
-	double s1;
-	fstream fs;
-	fs.open(file, fstream::in | fstream::out | fstream::app);
-	if (!fs.is_open())
+	const char* file = "MyFile1.dat";
+	fstream out;
+	out.open(file, fstream::app | fstream::binary);
+	if (!out.is_open())
 	{
 		cout << "File open error" << endl;
 	}
 	else
 	{
-		k = strlen(name);
-		for (i = 0; i < k; i++)
-		{
-			s = (int)name[i];
-			bitset<7> temp(s);
-			fs << temp;
-		}
-		fs << " ";
-		k = strlen(date);
-		for (i = 0; i < k; i++)
-		{
-			s = (int)date[i];
-			bitset<7> temp(s);
-			fs << temp;
-		}
-		fs << " ";
-		s1 = price;
-		bitset<7> temp(s1);
-		fs << temp;
-		fs << " ";
-		s = number;
-		bitset<7> temp1(s);
-		fs << temp1;
-		fs << " ";
+		out << *this;
 	}
-	fs << '\n';
-	fs.close();
+	out << '\n';
+	out.close();
 }
 
 void Goods::read()
 {
-	const char* file = "MyFile1.txt";
-	int i, k, s;
-	double s1;
-	fstream fs;
-	fs.open(file, fstream::in | fstream::out | fstream::app);
-	if (!fs.is_open())
+	const char* file = "MyFile1.dat";
+	fstream in;
+	in.open(file, fstream::in | fstream::binary);
+	if (!in.is_open())
 	{
 		cout << "File open error" << endl;
 	}
 	else
 	{
-		int i, k, n, w, x;
-		char* str = new char;
-		char* s = new char;
-		char* s1 = new char;
-		char* s2 = new char;
-		int c;
-		fs >> str;
-		n = strlen(str);
-		k = 0; w = 0;
-		while (k < n - 1)
-		{
-			for (i = 0; i < 7; i++)
-			{
-				s[i] = str[k + i];
-			}
-			s[7] = '\0';
-			k = k + 7;
-			c = atoi(s);
-			i = 0; x = 0;
-			while (c != 0)
-			{
-				x = x + (c % 10) * pow(2, i);
-				i++;
-				c = c / 10;
-			}
-			s1[w] = (char)x;
-			w++;
-		}
-		s1[w] = '\0';
-		this->SetName(s1);
-		fs >> str;
-		n = strlen(str);
-		k = 0; w = 0;
-		while (k < n - 1)
-		{
-			for (i = 0; i < 7; i++)
-			{
-				s[i] = str[k + i];
-			}
-			s[7] = '\0';
-			k = k + 7;
-			c = atoi(s);
-			i = 0; x = 0;
-			while (c != 0)
-			{
-				x = x + (c % 10) * pow(2, i);
-				i++;
-				c = c / 10;
-			}
-			s2[w] = (char)x;
-			w++;
-		}
-		s2[w] = '\0';
-		this->SetDate(s2);
-		fs >> str;
-		c = atoi(str);
-		i = 0; x = 0;
-		while (c != 0)
-		{
-			x = x + (c % 10) * pow(2, i);
-			i++;
-			c = c / 10;
-		}
-		this->SetPrice(x);
-		char* str1 = new char;
-		fs >> str1;
-		int c1 = atoi(str1);
-		i = 0; x = 0;
-		while (c1 != 0)
-		{
-			x = x + (c1 % 10) * pow(2, i);
-			i++;
-			c1 = c1 / 10;
-		}
-		this->SetNumber(x);
+		in >> *this;
 	}
-	fs.close();
+	in.close();
 }
 
 Goods::~Goods()
