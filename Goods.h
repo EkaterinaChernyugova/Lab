@@ -18,9 +18,9 @@ public:
 	void		SetDate(const char* valDate);										//изменение даты получения товара
 	void		ExtraCharge();														//наценка товара
 	void		Markdown();															//уценка товара 
-	char*		ToString();															//строковое преобразование 
-	char*		ToStringPrice();													//строковое преобразование цены товара
-	char*		ToStringNumber();													//строковое преобразование количества товара
+	char* ToString();															//строковое преобразование 
+	char* ToStringPrice();													//строковое преобразование цены товара
+	char* ToStringNumber();													//строковое преобразование количества товара
 	Goods& operator = (const Goods* value);											//перегрузка оператора присваивания
 	friend Goods operator + (Goods& value1, Goods& value2);							//перегрузка дружественного оператора сложения
 	Goods& operator - (const Goods& value);											//перегрузка оператора вычитания
@@ -48,4 +48,3 @@ private:
 	double		price;					//цена товара
 	int			number;					//количество единиц
 };
-
