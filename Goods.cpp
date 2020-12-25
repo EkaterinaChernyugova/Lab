@@ -8,6 +8,18 @@ using namespace std;
 
 int Goods::count = 0;
 
+void Goods::SetName(const char* valName)
+{
+	name = new const char[strlen(valName)];
+	name = valName;
+}
+
+void Goods::SetDate(const char* valDate)
+{
+	date = new const char[strlen(valDate)];
+	date = valDate;
+}
+
 void Goods::SetPrice(double valPrice)
 {
 	if (valPrice > 0)
@@ -26,23 +38,27 @@ void Goods::SetNumber(int valNumber)
 
 Goods::Goods(const char* valName, const char* valDate, double valPrice, int valNumber)
 {
-	name	= valName;
-	date	= valDate;
-	price	= valPrice;
-	number	= valNumber;
+	name = new const char;
+	date = new const char;
+	name = valName;
+	date = valDate;
+	price = valPrice;
+	number = valNumber;
 	count++;
 }
 
 Goods::Goods()
 {
-	name	= "Book";
-	date	= "21.11";
-	price	= 255;
-	number	= 11;
+	name = new const char;
+	date = new const char;
+	name = "Book";
+	date = "21.11";
+	price = 255;
+	number = 11;
 	count++;
 }
 
-Goods::Goods(const Goods &value)
+Goods::Goods(const Goods& value)
 {
 	this->name = value.name;
 	this->date = value.date;
@@ -51,10 +67,90 @@ Goods::Goods(const Goods &value)
 	count++;
 }
 
+Goods& Goods::operator = (const Goods* value)
+{
+	SetName(value->name);
+	SetDate(value->date);
+	this->price = value->price;
+	this->number = value->number;
+	return *this;
+}
+
+Goods operator + (Goods& value1, Goods& value2)
+{
+	Goods temp;
+	temp.number = value1.number + value2.number;
+	return temp;
+}
+
+Goods& Goods::operator - (const Goods& value)
+{
+	Goods temp;
+	temp.number = this->number - value.number;
+	return temp;
+}
+
+Goods& Goods::operator ++()
+{
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value++;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return *this;
+}
+
+Goods& Goods::operator --()
+{
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value--;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return *this;
+}
+
+Goods& Goods::operator ++(const int)
+{
+	Goods temp(*this);
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value++;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return temp;
+}
+
+Goods& Goods::operator --(const int)
+{
+	Goods temp(*this);
+	char str[6];
+	strcpy_s(str, this->date);
+	str[5] = '\0';
+	int value = atoi(&str[1]);
+	value--;
+	str[1] = (value % 10) + '0';
+	this->SetDate(str);
+	return temp;
+}
+
+Goods::operator double()
+{
+	Goods object;
+	double res = (double)object.price;
+	return res;
+}
+
 Goods::~Goods()
 {
-	delete[] name;
-	delete[] date;
+	//delete[] name;
+	//delete[] date;
 	count--;
 }
 
@@ -66,15 +162,15 @@ void Goods::ExtraCharge()
 
 void Goods::Markdown()
 {
-	if (number != 0) 
+	if (number != 0)
 	{
 		number--;
-	}	
+	}
 }
 
 const char* Goods::getName()
 {
-	return name; 
+	return name;
 }
 
 const char* Goods::getDate()
@@ -82,12 +178,12 @@ const char* Goods::getDate()
 	return date;
 }
 
-double	Goods::getPrice() 
-{ 
-	return price; 
+double	Goods::getPrice()
+{
+	return price;
 }
 
-int		Goods::	getNumber() 
+int		Goods::getNumber()
 {
 	return number;
 }
@@ -143,7 +239,7 @@ char* Goods::ToStringNumber()
 	return strNumber;
 }
 
-char* Goods::ToString() 
+char* Goods::ToString()
 {
 	int  k, l, i;
 	char* strPrice;
@@ -170,9 +266,6 @@ char* Goods::ToString()
 	{
 		ST[i] = STR[i];
 	}
-	ST[l - 1] = '\0';
+	ST[l] = '\0';
 	return ST;
 }
-
-
-
