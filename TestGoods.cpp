@@ -34,6 +34,8 @@ bool TestBinary(Goods x, Goods y)
     x.write();
     y.read();
 
+    
+
     if (strcmp(x.getName(), y.getName()) == 0 && strcmp(x.getDate(), y.getDate()) == 0 && x.getPrice() == y.getPrice() && x.getNumber() == y.getNumber())
     {
         return true;

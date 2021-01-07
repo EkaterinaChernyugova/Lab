@@ -210,9 +210,16 @@ void Goods::write()
 	}
 	else
 	{
-		out << *this;
+		out.write(name, sizeof(name));
+		out.write(" ", sizeof(1));
+		out.write(date, sizeof(date));
+		out.write(" ", sizeof(1));
+		out.write(ToStringPrice(), sizeof(ToStringPrice()));
+		out.write(" ", sizeof(1));
+		out.write(ToStringNumber(), sizeof(ToStringNumber()));
+		out.write(" ", sizeof(1));
+		out.write("\n", sizeof(2));
 	}
-	out << '\n';
 	out.close();
 }
 
@@ -227,7 +234,16 @@ void Goods::read()
 	}
 	else
 	{
-		in >> *this;
+		char* s1 = new char;
+		char* s2 = new char;
+		char* s3 = new char;
+		char* s4 = new char;
+		in.read((char*)&s1, sizeof(s1));
+		in.read((char*)&s2, sizeof(s2));
+		in.read((char*)&s3, sizeof(s3));
+		in.read((char*)&s4, sizeof(s4));
+		double pr = atoi(s3);
+		int num = atoi(s4);
 	}
 	in.close();
 }
