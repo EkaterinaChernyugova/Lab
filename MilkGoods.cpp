@@ -26,7 +26,7 @@ MilkGoods::~MilkGoods()
 	delete[] term;
 }
 
-char* MilkGoods::ToStringMilk()
+char* MilkGoods::ToString()
 {
 	int  k, l, i;
 	char* strPrice;

@@ -10,7 +10,7 @@ public:
 	~MilkGoods();
 	const char* getTerm();
 	void setTerm(const char* valTerm);
-	char* ToStringMilk();
+	char* ToString() override;
 	void recount();
 private:
 	const char* term;

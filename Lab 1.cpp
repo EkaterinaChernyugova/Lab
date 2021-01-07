@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include "Goods.h"
 #include  "TestGoods.h"
 #include "ChildGoods.h"
@@ -20,8 +20,8 @@ int main()
     MilkGoods c("Milk", "03.06", 65.0, 100, "15.06");
 
     cout << a.ToString() << endl;
-    cout << b.ToStringChild() << endl;
-    cout << c.ToStringMilk() << endl;
+    cout << b.ToString() << endl;
+    cout << c.ToString() << endl;
 
     cout << TestAge(b, 10) << endl;
     cout << TestAge(b, 18) << endl;

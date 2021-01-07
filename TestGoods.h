@@ -6,4 +6,4 @@
 using namespace std;
 
 bool TestAge(ChildGoods x, int val);
-bool TestRec(MilkGoods x);
+bool TestRec(MilkGoods x); 

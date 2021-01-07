@@ -1,7 +1,7 @@
 #include "ChildGoods.h"
 #include "Goods.h"
 
-const char* ChildGoods:: getAge()
+const char* ChildGoods::getAge()
 {
 	return age;
 }
@@ -39,7 +39,7 @@ ChildGoods::~ChildGoods()
 	delete[] type;
 }
 
-char* ChildGoods::ToStringChild()
+char* ChildGoods::ToString()
 {
 	int  k, l, i;
 	char* strPrice;
