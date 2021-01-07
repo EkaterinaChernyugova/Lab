@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 bool TestList()
 {
     cout << "List testing: \n------------------------" << endl;
@@ -18,75 +17,116 @@ bool TestList()
     Goods c("Soap", "03.12", 15.0, 448);
     Goods d("Socks", "07.05", 134.0, 22);
     Goods e("Chocolate", "15.07", 61.0, 37);
+    int k, i, n = 100;
     int start = clock();
-    try
+    list<int> mylist;
+    for (i = 0; i < n; i++)
     {
-        list<Goods> mylist;
-        mylist.size();
-        mylist.push_front(a);
-        mylist.push_back(b);
-        mylist.push_front(c);
-        mylist.push_back(d);
-        mylist.push_back(e);
-        mylist.clear();
-        mylist.push_front(a);
-        mylist.push_back(b);
-        mylist.push_front(c);
-        mylist.push_back(d);
-        mylist.push_back(e);
-        mylist.pop_front();
-        mylist.pop_back();
-        mylist.sort();
-        int end = clock();
-        cout << end - start / CLOCKS_PER_SEC << " seconds" <<endl;
-        return true;
+        k = rand() % 100 + 1;
+        mylist.push_front(k);
+        mylist.push_back(k);
     }
-    catch (exception& ex)
+    n = mylist.size();
+    int end = clock();
+    cout << "Adding: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    mylist.sort();
+    end = clock();
+    cout << "Sorting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    mylist.clear();
+    end = clock();
+    cout << "Deleting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    list<Goods> mylist1;
+    for (i = 0; i < n; i++)
     {
-        cout << ex.what() << endl;
-        return false;
-    }  
+        mylist1.push_front(a);
+        mylist1.push_back(b);
+        mylist1.push_front(c);
+        mylist1.push_back(d);
+        mylist1.push_back(e);
+    }
+    n = mylist1.size();
+    end = clock();
+    cout << "Adding: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    mylist.sort();
+    end = clock();
+    cout << "Sorting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    mylist.clear();
+    end = clock();
+    cout << "Deleting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    return true;
 }
 
 bool TestSet()
 {
-    cout << "Set testing: \n------------------------" << endl;
+    cout << "\nSet testing: \n------------------------" << endl;
     Goods a("Juice", "23.06", 75.0, 120);
     Goods b("Powder", "04.11", 30.0, 273);
     Goods c("Soap", "03.12", 15.0, 448);
     Goods d("Socks", "07.05", 134.0, 22);
     Goods e("Chocolate", "15.07", 61.0, 37);
+    int k, i, n = 200;
     int start = clock();
-    try
+    set <int> myset;
+    for (i = 0; i < n; i++)
     {
-        set <Goods> myset;
-        myset.insert(a);
-        myset.insert(b);
-        myset.insert(c);
-        myset.insert(d);
-        myset.insert(e);
-        myset.clear();
-        myset.insert(a);
-        myset.insert(b);
-        myset.insert(c);
-        myset.insert(d);
-        myset.insert(e);
-        myset.find(a);
-        myset.erase(b);
-        int end = clock();
-        cout << end - start / CLOCKS_PER_SEC << " seconds" << endl;
-        return true;
+        k = rand() % 1000 + 1;
+        myset.insert(k);
     }
-    catch (exception& ex)
+    n = myset.size();
+    int end = clock();
+    cout << "Adding: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    myset.find(220);
+    end = clock();
+    cout << "Search: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    myset.clear();
+    end = clock();
+    cout << "Deleting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    set <Goods> myset1;
+    myset1.insert(a);
+    for (i = 0; i < n; i++)
     {
-        cout << ex.what() << endl;
-        return false;
+        myset1.insert(a);
+        myset1.insert(b);
+        myset1.insert(c);
+        myset1.insert(d);
+        myset1.insert(e);
     }
+    n = myset1.size();
+    end = clock();
+    cout << "Adding: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;*/
+
+    start = clock();
+    myset1.find(a);
+    end = clock();
+    cout << "Search: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    start = clock();
+    myset1.clear();
+    end = clock();
+    cout << "Deleting: n = " << n << ", " << end - start / CLOCKS_PER_SEC << " seconds" << endl;
+
+    return true;
 }
 
 int main()
 {
-    cout << TestList() << endl;
-    cout << TestSet() << endl;
-    
+    TestList();
+    TestSet();
 }

@@ -149,8 +149,8 @@ Goods::operator double()
 
 Goods::~Goods()
 {
-	//delete[] name;
-	//delete[] date;
+	delete[] name;
+	delete[] date;
 	count--;
 }
 
